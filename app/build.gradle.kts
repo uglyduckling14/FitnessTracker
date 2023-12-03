@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.cs3200firebasestarter"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -51,7 +51,11 @@ android {
 }
 
 dependencies {
-    implementation("com.google.firebase:firebase-auth-ktx:22.1.2")
+    implementation (platform("com.google.firebase:firebase-bom:32.6.0"))
+    implementation ("com.google.firebase:firebase-auth-ktx")
+    implementation ("com.google.firebase:firebase-firestore-ktx")
+    implementation("com.google.android.gms:play-services-ads:22.5.0")
+
     val nav_version = "2.7.4"
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.1")
     implementation("androidx.navigation:navigation-compose:$nav_version")

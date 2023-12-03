@@ -17,7 +17,7 @@ fun SplashScreen(navHostController: NavHostController) {
 
     LaunchedEffect(true) {
         val loginStatusCheck = async {
-            // TODO: check to see if user is logged in
+            UserRepository.isUserLoggedIn()
         }
         // wait for 3 seconds or until the login check is
         // done before navigating
@@ -38,16 +38,10 @@ fun SplashScreen(navHostController: NavHostController) {
         verticalArrangement = Arrangement.SpaceAround
     ) {
         Text(
-            text = "Firebase Todos",
+            text = "Fitness Tracker",
             modifier = Modifier.fillMaxWidth(),
             style = MaterialTheme.typography.headlineLarge,
             textAlign = TextAlign.Center
-        )
-        Text(
-            text = "USU-CS3200",
-            modifier = Modifier.fillMaxWidth(),
-            style = MaterialTheme.typography.headlineSmall,
-            textAlign = TextAlign.Center,
         )
     }
 }

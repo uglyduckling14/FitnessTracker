@@ -16,7 +16,9 @@ object UserRepository {
     fun getCurrentUserId(): String? {
         return Firebase.auth.currentUser?.uid
     }
-
+    fun isUserLoggedIn(): Boolean{
+        return getCurrentUserId() != null
+    }
     fun logout() {
         Firebase.auth.signOut()
     }

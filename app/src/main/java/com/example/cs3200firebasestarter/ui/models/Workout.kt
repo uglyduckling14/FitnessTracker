@@ -1,10 +1,9 @@
 package com.example.cs3200firebasestarter.ui.models
 
-import java.time.Instant
 
 data class Workout(
-    val startTime: Instant?=null,
-    val endTime: Instant?=null,
+    val startTime: Int,
+    val endTime: Int,
     val caloriesBurnedRecord: Int?=null,
     val exerciseSession: ExerciseSessionRecord?=null,
     val distance: Int?=null,
@@ -12,5 +11,5 @@ data class Workout(
     val id:String?=null,
     val name:String?=null
 ) {
-    constructor() : this(null, null,0, null, 0, "", "", "")
+    constructor() : this(0, 0,0, null, 0, "", "", "")
 }

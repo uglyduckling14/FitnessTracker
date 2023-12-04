@@ -1,5 +1,10 @@
 package com.example.cs3200firebasestarter.ui.screens
 
+import android.content.Context
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -10,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.cs3200firebasestarter.ui.components.WorkoutListItem
@@ -19,9 +25,32 @@ import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
 
 @Composable
-fun HomeScreen(navHostController: NavHostController) {
+fun HomeScreen(navHostController: NavHostController,context: Context) {
     val viewModel: HomeViewModel = viewModel()
     val state = viewModel.uiState
+    var stepOutput by remember {
+        mutableStateOf("")
+    }
+
+    DisposableEffect(true){
+        val sensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        val stepSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+        val stepListener = object: SensorEventListener {
+            override fun onSensorChanged(event: SensorEvent) {
+                stepOutput = convertSensorReadingToString(event.values)
+            }
+
+            override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) {
+
+            }
+
+        }
+        sensorManager.registerListener(stepListener, stepSensor, SensorManager.SENSOR_DELAY_NORMAL)
+        onDispose {
+            sensorManager.unregisterListener(stepListener)
+        }
+    }
+    Text(text = stepOutput)
     LaunchedEffect(true){
         viewModel.getWorkouts()
     }
@@ -51,4 +80,7 @@ fun HomeScreen(navHostController: NavHostController) {
             }
             )
     }
+}
+fun convertSensorReadingToString(reading:FloatArray): String{
+    return reading.joinToString { "\n" }
 }

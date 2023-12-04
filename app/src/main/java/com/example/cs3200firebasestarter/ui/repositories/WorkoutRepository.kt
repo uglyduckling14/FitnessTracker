@@ -15,8 +15,8 @@ object WorkoutRepository{
 
     suspend fun getWorkouts(): List<Workout>{
         if(!cacheInitialized){
-            val snapshot = Firebase.firestore.collection("workoutRecords").
-            whereEqualTo("userId", UserRepository.getCurrentUserId())
+            val snapshot = Firebase.firestore.collection("workoutRecords")
+                .whereEqualTo("userId", UserRepository.getCurrentUserId())
                 .get().await()
             workoutCache.clear()
             workoutCache.addAll(snapshot.toObjects())
@@ -25,14 +25,14 @@ object WorkoutRepository{
         return workoutCache
     }
     suspend fun createWorkout(
-        startTime: Instant,
-        endTime:Instant,
+        startTime: Int,
+        endTime:Int,
         caloriesBurnedRecord: Int,
         distance:Int,
         exerciseSession: ExerciseSessionRecord,
         name:String
     ):Workout{
-        val doc = Firebase.firestore.collection("workouts").document()
+        val doc = Firebase.firestore.collection("workoutRecords").document()
         val workout = Workout(
             startTime = startTime,
             endTime = endTime,

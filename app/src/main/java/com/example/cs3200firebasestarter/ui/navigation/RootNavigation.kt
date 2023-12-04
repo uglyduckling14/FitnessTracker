@@ -1,5 +1,6 @@
 package com.example.cs3200firebasestarter.ui.navigation
 
+import android.content.Context
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -20,7 +21,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RootNavigation() {
+fun RootNavigation(context: Context) {
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
@@ -77,7 +78,9 @@ fun RootNavigation() {
             },
             floatingActionButton = {
                 if (currentDestination?.hierarchy?.none { it.route == Routes.launchNavigation.route || it.route == Routes.splashScreen.route } == true){
-                    FloatingActionButton(onClick = {}) {
+                    FloatingActionButton(onClick = {
+                        navController.navigate(Routes.workoutScreen.route)
+                    }) {
                         Icon(imageVector = Icons.Default.Add, contentDescription = "Add Item")
                     }
                 }
@@ -96,7 +99,8 @@ fun RootNavigation() {
                     composable(route = Routes.signUp.route) { SignUpScreen(navController) }
                 }
                 navigation(route = Routes.appNavigation.route, startDestination = Routes.home.route) {
-                    composable(route = Routes.home.route) { HomeScreen(navController) }
+                    composable(route = Routes.home.route) { HomeScreen(navController, context) }
+                    composable(route = Routes.workoutScreen.route){ WorkoutScreen(navController)}
                 }
                 composable(route = Routes.splashScreen.route) { SplashScreen(navController) }
             }

@@ -26,7 +26,7 @@ class WorkoutViewModel(application: Application):
 
     val uiState = WorkoutScreenState()
             var id:String? = null
-            val zoneOffset = ZonedDateTime.now().withNano(0)
+            val zoneOffset = System.currentTimeMillis().toInt();
             suspend fun setUpInitialState(id: String?){
                 if(id == null || id == "new") return
                 this.id = id
@@ -47,15 +47,15 @@ class WorkoutViewModel(application: Application):
                     return
                 }
                 if(id == null){
-                    val off = ZonedDateTime.now().withNano(10)
+                    val off = System.currentTimeMillis().toInt();
                     val eRecord = ExerciseSessionRecord(
                         uiState.exerciseNotes,
                         uiState.exerciseType,
                         uiState.exerciseTitle
                     )
                     WorkoutRepository.createWorkout(
-                        zoneOffset.toInstant(),
-                        off.toInstant(),
+                        zoneOffset,
+                        off,
                         uiState.caloriesBurned,
                         uiState.distance,
                         eRecord,

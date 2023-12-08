@@ -6,7 +6,6 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
-import java.time.Instant
 
 object WorkoutRepository{
 
@@ -24,13 +23,14 @@ object WorkoutRepository{
         }
         return workoutCache
     }
+
     suspend fun createWorkout(
         startTime: Int,
         endTime:Int,
         caloriesBurnedRecord: Int,
         distance:Int,
         exerciseSession: ExerciseSessionRecord,
-        name:String
+        name:String,
     ):Workout{
         val doc = Firebase.firestore.collection("workoutRecords").document()
         val workout = Workout(
@@ -41,14 +41,16 @@ object WorkoutRepository{
             exerciseSession = exerciseSession,
             name = name,
             id = doc.id,
-            userId = UserRepository.getCurrentUserId()
+            userId = UserRepository.getCurrentUserId(),
+            completed = false
         )
         doc.set(workout).await()
         workoutCache.add(workout)
         return workout
     }
     suspend fun updateWorkout(workout: Workout){
-        Firebase.firestore.collection("workouts")
+        Firebase.firestore
+            .collection("workoutRecords")
             .document(workout.id!!)
             .set(workout)
             .await()

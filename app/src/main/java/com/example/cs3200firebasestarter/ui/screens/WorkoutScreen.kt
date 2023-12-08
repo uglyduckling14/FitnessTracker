@@ -122,13 +122,6 @@ fun WorkoutScreen(navHostController: NavHostController) {
                     Button(onClick = { scope.launch {
                         viewModel.saveWorkout()
                         navHostController.navigate(Routes.home.route)
-//                        if (CharacterRepository.getCurrentUserId() != null) {
-//                            navHostController.navigate(Routes.appNavigation.route) {
-//                                popUpTo(navHostController.graph.id) {
-//                                    inclusive = true
-//                                }
-//                            }
-//                        }
                     } }, elevation = null) {
                         Text(text = "Save")
                     }

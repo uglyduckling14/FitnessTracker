@@ -9,7 +9,8 @@ data class Workout(
     val distance: Int?=null,
     val userId:String?=null,
     val id:String?=null,
-    val name:String?=null
+    val name:String?=null,
+    val completed:Boolean=false
 ) {
-    constructor() : this(0, 0,0, null, 0, "", "", "")
+    constructor() : this(0, 0,0, null, 0, "", "", "", false)
 }

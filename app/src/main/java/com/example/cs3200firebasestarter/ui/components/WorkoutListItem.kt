@@ -1,6 +1,7 @@
 package com.example.cs3200firebasestarter.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,23 +10,21 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.example.cs3200firebasestarter.R
 
 @Composable
 fun WorkoutListItem(
     name: String? = null,
     distance: Int? = null,
     exerciseType: Int? = null,
-    onEditPressed: () -> Unit = {}
+    onStartPressed: () -> Unit = {}
 ){
     Column(
         modifier = Modifier
@@ -48,11 +47,14 @@ fun WorkoutListItem(
                 color = MaterialTheme.colorScheme.primary
             )
 
-            // Edit Icon
+            // Start Workout Icon
             Icon(
-                imageVector = Icons.Default.Edit,
+                imageVector = Icons.Default.PlayArrow,
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.clickable{
+                    onStartPressed()
+                }
             )
         }
 
@@ -76,17 +78,5 @@ fun WorkoutListItem(
             )
         }
 
-        // Additional Content or Actions
-        // (You can customize this part based on your requirements)
-
-        // Edit Button
-        Button(
-            onClick = onEditPressed,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 8.dp)
-        ) {
-            Text(text = "Edit")
-        }
     }
 }

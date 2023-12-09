@@ -113,17 +113,14 @@ fun StartScreen(navHostController: NavHostController, id: String, context: Conte
             sensorManager.unregisterListener(stepListener)
         }
     }
-    LaunchedEffect(stepOutput, state.exerciseNotes, state.endTime){
-        viewModel.saveWorkout()
-    }
     Column(modifier = Modifier
         .fillMaxSize()
         .padding(16.dp),
         verticalArrangement = Arrangement.SpaceAround) {
-//        Text(text = state.exerciseTitle)
-//        Text(text = stepOutput)
-//        Text(text = state.caloriesBurned.toString())
-//        Text(text = state.distance.toString())
+        Text(text = state.exerciseTitle)
+        Text(text = stepOutput)
+        Text(text = state.caloriesBurned.toString())
+        Text(text = state.distance.toString())
         FormField(
             value = state.exerciseNotes,
             onValueChange = {

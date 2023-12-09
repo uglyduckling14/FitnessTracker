@@ -28,7 +28,7 @@ fun CompleteScreen(navHostController: NavHostController, id:String) {
     Column(modifier = Modifier
         .fillMaxSize()
         .padding(16.dp)){
-        Text(text = "Congrats you completed your workout (${state.exerciseTitle}! \n" +
+        Text(text = "Congrats you completed your ${state.exerciseTitle}! \n" +
                 "You burned ${state.caloriesBurned} calories over ${
                     if(state.endTime != "" && state.startTime !=""){
                         state.endTime.toInt() - state.startTime.toInt()

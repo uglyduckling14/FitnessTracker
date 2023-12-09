@@ -34,12 +34,11 @@ class WorkoutViewModel(application: Application):
                 if(id == null || id == "new") return
                 this.id = id
                 val workout = WorkoutRepository.getWorkouts().find{it.id == id} ?: return
-
                 uiState.caloriesBurned = workout.caloriesBurnedRecord!!
                 uiState.distance = workout.distance!!
                 uiState.startTime = workout.startTime.toString()
                 uiState.endTime = workout.endTime.toString()
-                uiState.exerciseTitle = workout.exerciseSession?.title.toString()
+                uiState.exerciseTitle = workout.name.toString()
                 uiState.exerciseType = workout.exerciseSession?.exerciseType!!
                 uiState.exerciseNotes = workout.exerciseSession.notes.toString()
             }
@@ -51,9 +50,9 @@ class WorkoutViewModel(application: Application):
                 }
                 if(id == null){
                     val eRecord = ExerciseSessionRecord(
-                        uiState.exerciseNotes,
-                        uiState.exerciseType,
                         uiState.exerciseTitle,
+                        uiState.exerciseType,
+                        uiState.exerciseNotes,
                         uiState.lineData
                     )
                     WorkoutRepository.createWorkout(
@@ -62,7 +61,8 @@ class WorkoutViewModel(application: Application):
                         uiState.caloriesBurned,
                         uiState.distance,
                         eRecord,
-                        uiState.exerciseTitle
+                        uiState.exerciseTitle,
+                        uiState.completed
                     )
                 }else{ // update
                     val workout = WorkoutRepository.getWorkouts().find{it.id == id}

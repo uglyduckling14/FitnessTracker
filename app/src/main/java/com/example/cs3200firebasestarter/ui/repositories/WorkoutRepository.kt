@@ -16,7 +16,8 @@ object WorkoutRepository{
         if(!cacheInitialized){
             val snapshot = Firebase.firestore.collection("workoutRecords")
                 .whereEqualTo("userId", UserRepository.getCurrentUserId())
-                .get().await()
+                .get()
+                .await()
             workoutCache.clear()
             workoutCache.addAll(snapshot.toObjects())
             cacheInitialized = true
@@ -31,6 +32,7 @@ object WorkoutRepository{
         distance:Int,
         exerciseSession: ExerciseSessionRecord,
         name:String,
+        completed:Boolean
     ):Workout{
         val doc = Firebase.firestore.collection("workoutRecords").document()
         val workout = Workout(
@@ -42,7 +44,7 @@ object WorkoutRepository{
             name = name,
             id = doc.id,
             userId = UserRepository.getCurrentUserId(),
-            completed = false
+            completed = completed
         )
         doc.set(workout).await()
         workoutCache.add(workout)

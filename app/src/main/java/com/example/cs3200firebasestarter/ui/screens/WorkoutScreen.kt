@@ -1,7 +1,5 @@
 package com.example.cs3200firebasestarter.ui.screens
 
-import android.content.Context
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -30,8 +28,6 @@ import androidx.compose.material3.MenuItemColors
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TextField
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -43,7 +39,6 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.toSize
-import androidx.core.content.ContextCompat.getSystemService
 import com.example.cs3200firebasestarter.ui.viewmodels.WorkoutViewModel
 import com.example.cs3200firebasestarter.ui.components.FormField
 import com.example.cs3200firebasestarter.ui.navigation.Routes

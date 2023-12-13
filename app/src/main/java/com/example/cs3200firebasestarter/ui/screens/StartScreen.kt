@@ -75,31 +75,31 @@ fun StartScreen(navHostController: NavHostController, id: String, context: Conte
                     }
 
                     handler.post {
-                        stepOutput = (event.values[0]- initialSteps).toString()
+                        stepOutput = (event.values[0] - initialSteps).toString()
                         calculateCalories()
                         calculateDistance()
-                        state.lineData = state.lineData + LineData(System.currentTimeMillis().toInt()/60000F, state.caloriesBurned)
+                        state.lineData.add(LineData(System.currentTimeMillis().toInt()/60000F, state.caloriesBurned))
                         isUpdating = false
                     }
                 }
             }
             fun calculateCalories(){
                 when(state.exerciseType){
-                    0 -> {state.caloriesBurned = (0.08 * stepOutput.toDouble()).toInt() }
-                    1 -> {state.caloriesBurned = (0.04 * stepOutput.toDouble()).toInt() }
-                    2 -> {state.caloriesBurned = (0.06 * stepOutput.toDouble()).toInt() }
-                    3 -> {state.caloriesBurned = (0.12 * stepOutput.toDouble()).toInt() }
-                    4 -> {state.caloriesBurned = (0.10 * stepOutput.toDouble()).toInt() }
+                    0 -> {state.caloriesBurned = (1.08 * stepOutput.toDouble()).toInt() }
+                    1 -> {state.caloriesBurned = (1.04 * stepOutput.toDouble()).toInt() }
+                    2 -> {state.caloriesBurned = (1.06 * stepOutput.toDouble()).toInt() }
+                    3 -> {state.caloriesBurned = (1.12 * stepOutput.toDouble()).toInt() }
+                    4 -> {state.caloriesBurned = (1.10 * stepOutput.toDouble()).toInt() }
                 }
             }
 
             fun calculateDistance(){
                 when(state.exerciseType){
-                    0 -> {state.distance = (0.004 * stepOutput.toDouble()).toInt() }
-                    1 -> {state.distance = (0.002 * stepOutput.toDouble()).toInt() }
-                    2 -> {state.distance = (0.006 * stepOutput.toDouble()).toInt() }
-                    3 -> {state.distance = (0.012 * stepOutput.toDouble()).toInt() }
-                    4 -> {state.distance = (0.004 * stepOutput.toDouble()).toInt() }
+                    0 -> {state.distance = (1.004 * stepOutput.toDouble()).toInt() }
+                    1 -> {state.distance = (2.002 * stepOutput.toDouble()).toInt() }
+                    2 -> {state.distance = (3.006 * stepOutput.toDouble()).toInt() }
+                    3 -> {state.distance = (4.012 * stepOutput.toDouble()).toInt() }
+                    4 -> {state.distance = (5.004 * stepOutput.toDouble()).toInt() }
                 }
             }
 
@@ -120,7 +120,7 @@ fun StartScreen(navHostController: NavHostController, id: String, context: Conte
         Text(text = state.exerciseTitle)
         Text(text = stepOutput)
         Text(text = state.caloriesBurned.toString())
-        Text(text = state.distance.toString())
+        Text(text = state.lineData.toString())
         FormField(
             value = state.exerciseNotes,
             onValueChange = {

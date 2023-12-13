@@ -12,5 +12,5 @@ data class Workout(
     val userId:String?=null,
     val id:String?=null,
 ) {
-    constructor() : this(0, 0,0, null, 0,  "", false,"", "")
+    constructor() : this(0, 0,0, null, 0,  "", false, "", "")
 }

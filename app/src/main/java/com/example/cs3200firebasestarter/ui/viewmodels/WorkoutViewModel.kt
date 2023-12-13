@@ -21,7 +21,7 @@ class WorkoutScreenState{
     var exerciseType by mutableStateOf(0)
     var exerciseNotes by mutableStateOf("")
     var completed by mutableStateOf(false)
-    var lineData by mutableStateOf<List<LineData>>(emptyList())
+    var lineData = mutableListOf<LineData>()
 }
 
 
@@ -41,6 +41,7 @@ class WorkoutViewModel(application: Application):
                 uiState.exerciseTitle = workout.name.toString()
                 uiState.exerciseType = workout.exerciseSession?.exerciseType!!
                 uiState.exerciseNotes = workout.exerciseSession.notes.toString()
+                uiState.lineData = workout.exerciseSession.dataPoints.toMutableList()
             }
 
             suspend fun saveWorkout(){

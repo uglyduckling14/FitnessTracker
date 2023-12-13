@@ -1,6 +1,7 @@
 package com.example.cs3200firebasestarter.ui.repositories
 
 import com.example.cs3200firebasestarter.ui.models.ExerciseSessionRecord
+import com.example.cs3200firebasestarter.ui.models.LineData
 import com.example.cs3200firebasestarter.ui.models.Workout
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects

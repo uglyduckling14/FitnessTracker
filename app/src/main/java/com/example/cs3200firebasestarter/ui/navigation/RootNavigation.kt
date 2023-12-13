@@ -35,7 +35,7 @@ fun RootNavigation(context: Context) {
         drawerState = drawerState,
         drawerContent = {
             ModalDrawerSheet {
-                Text("Drawer title", modifier = Modifier.padding(16.dp))
+                Text("Fitness Tracker", modifier = Modifier.padding(16.dp))
                 Divider()
                 NavigationDrawerItem(
                     label = { Text(text = "Logout") },
@@ -54,7 +54,27 @@ fun RootNavigation(context: Context) {
                         }
                     }
                 )
-                // ...other drawer items
+                Divider()
+                NavigationDrawerItem(
+                    label = { Text(text = "Home")},
+                    selected = false,
+                    onClick = {
+                        navController.navigate(Routes.home.route)
+                        scope.launch {
+                            drawerState.apply {
+                                close()
+                            }
+                        }})
+                NavigationDrawerItem(
+                    label = { Text(text = "Completed Workouts")},
+                    selected = false,
+                    onClick = {
+                        navController.navigate(Routes.completedWorkouts.route)
+                        scope.launch {
+                            drawerState.apply {
+                                close()
+                            }
+                        }})
             }
         }
     ) {
@@ -62,7 +82,7 @@ fun RootNavigation(context: Context) {
             topBar = {
                 if (currentDestination?.hierarchy?.none { it.route == Routes.launchNavigation.route || it.route == Routes.splashScreen.route } == true) {
                     TopAppBar(
-                        title = { Text(text = "My App")},
+                        title = { Text(text = "Fitness Tracker")},
                         navigationIcon = {
                             IconButton(onClick = {
                                 scope.launch {
@@ -121,6 +141,7 @@ fun RootNavigation(context: Context) {
                             navBackStackEntry?.arguments?.get("id").toString())
                     }
                 }
+                composable(route = Routes.completedWorkouts.route){CompleteWorkoutsScreen(navController)}
                 composable(route = Routes.splashScreen.route) { SplashScreen(navController) }
             }
         }

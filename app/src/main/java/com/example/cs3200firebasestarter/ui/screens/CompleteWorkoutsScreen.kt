@@ -1,10 +1,17 @@
 package com.example.cs3200firebasestarter.ui.screens
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Divider
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -17,29 +24,29 @@ import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
 
 @Composable
-fun HomeScreen(navHostController: NavHostController) {
+fun CompleteWorkoutsScreen(navHostController: NavHostController) {
     val viewModel: HomeViewModel = viewModel()
     val state = viewModel.uiState
 
     LaunchedEffect(true){
         viewModel.getWorkouts()
     }
-    if(state.workouts.isNotEmpty()) {
+    if (state.workouts.isNotEmpty()) {
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
             verticalArrangement = Arrangement.SpaceAround
         ) {
             LazyColumn {
                 items(state.workouts, key = { it.id!! }) { workout ->
-                    if (!workout.completed) {
+                    if (workout.completed) {
                         WorkoutListItem(
                             name = workout.name,
                             distance = workout.distance,
                             exerciseType = workout.exerciseSession?.exerciseType,
-                            onStartPressed = {
-                                navHostController.navigate("startworkout?id=${workout.id}")
-                            },
-                            isComplete = false
+                            onStartPressed = {},
+                            isComplete = true
                         )
                         Divider()
                     }

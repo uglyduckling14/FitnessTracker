@@ -24,8 +24,10 @@ fun WorkoutListItem(
     name: String? = null,
     distance: Int? = null,
     exerciseType: Int? = null,
-    onStartPressed: () -> Unit = {}
+    onStartPressed: () -> Unit = {},
+    isComplete: Boolean
 ){
+    val EXERCISE_TYPES = arrayOf("Running", "Walking", "Hiking", "Biking", "Dancing")
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -48,14 +50,16 @@ fun WorkoutListItem(
             )
 
             // Start Workout Icon
-            Icon(
-                imageVector = Icons.Default.PlayArrow,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.clickable{
-                    onStartPressed()
-                }
-            )
+            if(!isComplete) {
+                Icon(
+                    imageVector = Icons.Default.PlayArrow,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.clickable {
+                        onStartPressed()
+                    }
+                )
+            }
         }
 
         // Distance and Exercise Type
@@ -67,13 +71,13 @@ fun WorkoutListItem(
         ) {
             // Distance
             Text(
-                text = distance?.toString() ?: "0",
+                text = (distance?.toString() + " meters"),
                 style = MaterialTheme.typography.titleSmall
             )
 
             // Exercise Type
             Text(
-                text = exerciseType?.toString() ?: "",
+                text = EXERCISE_TYPES[exerciseType!!],
                 style = MaterialTheme.typography.titleSmall
             )
         }

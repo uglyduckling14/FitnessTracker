@@ -3,6 +3,7 @@ package com.example.cs3200firebasestarter.ui.navigation
 data class Screen(val route: String)
 
 object Routes {
+    val completedWorkouts = Screen("completedworkouts")
     val launchNavigation = Screen("launchnavigation")
     val appNavigation = Screen("appnavigation")
     val launch = Screen("launch")

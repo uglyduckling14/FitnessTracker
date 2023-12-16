@@ -18,6 +18,7 @@ import androidx.navigation.compose.*
 import androidx.navigation.navArgument
 import com.example.cs3200firebasestarter.ui.repositories.UserRepository
 import com.example.cs3200firebasestarter.ui.screens.*
+import com.example.cs3200firebasestarter.ui.theme.Purple80
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -99,9 +100,11 @@ fun RootNavigation(context: Context) {
             },
             floatingActionButton = {
                 if (currentDestination?.hierarchy?.none { it.route == Routes.launchNavigation.route || it.route == Routes.splashScreen.route } == true){
-                    FloatingActionButton(onClick = {
-                        navController.navigate(Routes.workoutScreen.route)
-                    }) {
+                    FloatingActionButton(
+                        onClick = {
+                            navController.navigate(Routes.workoutScreen.route)
+                        },
+                        containerColor = Purple80) {
                         Icon(imageVector = Icons.Default.Add, contentDescription = "Add Item")
                     }
                 }

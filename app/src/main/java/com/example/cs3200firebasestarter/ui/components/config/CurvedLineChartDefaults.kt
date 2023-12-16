@@ -1,6 +1,10 @@
 package com.example.cs3200firebasestarter.ui.components.config
 
 import androidx.compose.ui.graphics.Color
+import com.example.cs3200firebasestarter.ui.theme.Blue40
+import com.example.cs3200firebasestarter.ui.theme.Blue80
+import com.example.cs3200firebasestarter.ui.theme.Purple40
+import com.example.cs3200firebasestarter.ui.theme.Purple80
 
 /**
  * Default configuration values for a curved line chart.
@@ -14,12 +18,12 @@ object CurvedLineChartDefaults {
      */
     fun defaultColor() = CurvedLineChartColors(
         contentColor = listOf(
-            Color(0xffed625d),
-            Color(0xfff79f88)
+            Blue80,
+            Purple40
         ),
         dotColor = listOf(
-            Color(0xff50c0a8),
-            Color(0xff7a57e3),
+            Blue40,
+            Purple80,
         ),
         backgroundColors = listOf(
             Color.White,

@@ -24,7 +24,7 @@ internal fun DrawScope.drawXAxisLabels(
     count: Int,
     padding: Float,
     minLabelCount: Int,
-    textColor: Color = Color.Black,
+    textColor: Color = Color(0xFFD0CEBA),
 ) {
     val divisibleFactor = if (count > 10) count else 1
     val textSizeFactor = if (count > 10) 3 else 30
@@ -59,7 +59,7 @@ internal fun DrawScope.drawXAxisLabels(
     count: Int,
     padding: Float,
     minLabelCount: Int,
-    textColor: Color = Color.Black,
+    textColor: Color = Color(0xFFD0CEBA),
 ) {
     val textBounds = Rect()
     val textPaint = Paint().apply {
@@ -107,7 +107,7 @@ internal fun DrawScope.drawXAxisLabels(
 fun DrawScope.drawYAxisLabels(
     values: List<Float>,
     spacing: Float,
-    textColor: Color = Color.Black,
+    textColor: Color = Color.White,
 ) {
     val maxLabelCount = 4
     val maxLabelValue = values.maxOrNull() ?: return

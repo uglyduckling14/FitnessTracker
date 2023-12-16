@@ -14,7 +14,7 @@ object ChartDefaults {
         showAxes = true,
         showGridLines = true,
         axisStroke = 2F,
-        axisColor = Color.Black,
+        axisColor = Color(0xFFD0CEBA),
         minLabelCount = 2
     )
 
@@ -23,8 +23,8 @@ object ChartDefaults {
      */
     fun colorDefaults() = ChartColors(
         contentColor = listOf(
-            Color(0xffed625d),
-            Color(0xfff79f88)
+            Color(0xFF1F2041),
+            Color(0xFF4B3F72)
         ),
         backgroundColors = listOf(
             Color.Transparent, Color.Transparent
@@ -39,7 +39,7 @@ object ChartDefaults {
         fontStyle = null,
         fontWeight = null,
         fontFamily = null,
-        textColor = Color.Black,
+        textColor = Color(0xFFD0CEBA),
         maxLine = 1,
         overflow = TextOverflow.Ellipsis
     )

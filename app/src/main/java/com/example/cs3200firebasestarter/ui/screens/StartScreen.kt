@@ -40,6 +40,7 @@ import com.example.cs3200firebasestarter.ui.components.FormField
 import com.example.cs3200firebasestarter.ui.models.LineData
 import com.example.cs3200firebasestarter.ui.navigation.Routes
 import com.example.cs3200firebasestarter.ui.repositories.WorkoutRepository
+import com.example.cs3200firebasestarter.ui.theme.Purple80
 import com.example.cs3200firebasestarter.ui.viewmodels.WorkoutViewModel
 import kotlinx.coroutines.launch
 
@@ -78,28 +79,37 @@ fun StartScreen(navHostController: NavHostController, id: String, context: Conte
                         stepOutput = (event.values[0] - initialSteps).toString()
                         calculateCalories()
                         calculateDistance()
-                        state.lineData.add(LineData(System.currentTimeMillis().toInt()/60000F, state.caloriesBurned))
+                        state.lineData.add(
+                            LineData(0F, 0),
+                            )
+                        state.lineData.add(LineData(10F, 10),
+                            )
+                        state.lineData.add(LineData(05F, 5),
+                            )
+                        state.lineData.add(LineData(50F, 50),
+                            )
+                        state.lineData.add(LineData(03F, 3))
                         isUpdating = false
                     }
                 }
             }
             fun calculateCalories(){
                 when(state.exerciseType){
-                    0 -> {state.caloriesBurned = (1.08 * stepOutput.toDouble()).toInt() }
-                    1 -> {state.caloriesBurned = (1.04 * stepOutput.toDouble()).toInt() }
-                    2 -> {state.caloriesBurned = (1.06 * stepOutput.toDouble()).toInt() }
-                    3 -> {state.caloriesBurned = (1.12 * stepOutput.toDouble()).toInt() }
+                    0 -> {state.caloriesBurned = (.8 * stepOutput.toDouble()).toInt() }
+                    1 -> {state.caloriesBurned = (.4 * stepOutput.toDouble()).toInt() }
+                    2 -> {state.caloriesBurned = (.6 * stepOutput.toDouble()).toInt() }
+                    3 -> {state.caloriesBurned = (1.2 * stepOutput.toDouble()).toInt() }
                     4 -> {state.caloriesBurned = (1.10 * stepOutput.toDouble()).toInt() }
                 }
             }
 
             fun calculateDistance(){
                 when(state.exerciseType){
-                    0 -> {state.distance = (1.004 * stepOutput.toDouble()).toInt() }
-                    1 -> {state.distance = (2.002 * stepOutput.toDouble()).toInt() }
-                    2 -> {state.distance = (3.006 * stepOutput.toDouble()).toInt() }
-                    3 -> {state.distance = (4.012 * stepOutput.toDouble()).toInt() }
-                    4 -> {state.distance = (5.004 * stepOutput.toDouble()).toInt() }
+                    0 -> {state.distance = (.1 * stepOutput.toDouble()).toInt() }
+                    1 -> {state.distance = (.2 * stepOutput.toDouble()).toInt() }
+                    2 -> {state.distance = (.3 * stepOutput.toDouble()).toInt() }
+                    3 -> {state.distance = (.4 * stepOutput.toDouble()).toInt() }
+                    4 -> {state.distance = (.5 * stepOutput.toDouble()).toInt() }
                 }
             }
 
@@ -118,9 +128,10 @@ fun StartScreen(navHostController: NavHostController, id: String, context: Conte
         .padding(16.dp),
         verticalArrangement = Arrangement.SpaceAround) {
         Text(text = state.exerciseTitle)
-        Text(text = stepOutput)
-        Text(text = state.caloriesBurned.toString())
-        Text(text = state.lineData.toString())
+        if(state.exerciseType == 0) {
+            Text(text = "Steps: $stepOutput")
+        }
+        Text(text = "Calories Burned: ${state.caloriesBurned}")
         FormField(
             value = state.exerciseNotes,
             onValueChange = {
@@ -129,7 +140,7 @@ fun StartScreen(navHostController: NavHostController, id: String, context: Conte
         Icon(
             imageVector = Icons.Filled.Check,
             contentDescription = null,
-            tint = MaterialTheme.colorScheme.primary,
+            tint = Purple80,
             modifier = Modifier.clickable{
                 state.completed = true
                 state.endTime = (System.currentTimeMillis()/60000.00).toInt().toString()

@@ -8,7 +8,5 @@ Must have features:
 - User data must be stored on Firebase
 - Must have users to access a workout routine after watching an ad
 
-  Nice to have features:
-- Could have the user follow friends on the app to compare their workouts
-- Could have an option to pay to not have ads
-- Could have an option to create a custom workout routine with “premium” version
+Nice to have features:
+- Add a fancy graph to show stats of workout.

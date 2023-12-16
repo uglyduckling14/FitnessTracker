@@ -1,5 +1,6 @@
 package com.example.cs3200firebasestarter.ui.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,6 +13,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -28,6 +31,7 @@ import androidx.compose.material3.MenuItemColors
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.contentColorFor
 import androidx.compose.ui.geometry.Size
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -42,6 +46,7 @@ import androidx.compose.ui.unit.toSize
 import com.example.cs3200firebasestarter.ui.viewmodels.WorkoutViewModel
 import com.example.cs3200firebasestarter.ui.components.FormField
 import com.example.cs3200firebasestarter.ui.navigation.Routes
+import com.example.cs3200firebasestarter.ui.theme.Purple80
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -112,21 +117,25 @@ fun WorkoutScreen(navHostController: NavHostController) {
                     modifier = Modifier.fillMaxWidth()
                 ){
                     TextButton(onClick = { navHostController.popBackStack() }) {
-                        Text(text = "Cancel")
+                        Text(text = "Cancel", color = Purple80)
                     }
-                    Button(onClick = { scope.launch {
-                        viewModel.saveWorkout()
-                        navHostController.navigate(Routes.home.route)
+                    Button(
+                        colors = ButtonDefaults.buttonColors(Purple80),
+                        onClick = { scope.launch {
+                            viewModel.saveWorkout()
+                            navHostController.navigate(Routes.home.route)
                     } }, elevation = null) {
                         Text(text = "Save")
                     }
                 }
-                Text(
-                    text = "this is where the error message will go",
-                    style = androidx.compose.ui.text.TextStyle(color = MaterialTheme.colorScheme.error),
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Right
-                )
+                if(state.error) {
+                    Text(
+                        text = "Please enter a title",
+                        style = androidx.compose.ui.text.TextStyle(color = MaterialTheme.colorScheme.error),
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Right
+                    )
+                }
             }
         }
     }

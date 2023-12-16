@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import com.example.cs3200firebasestarter.ui.theme.Purple80
 
 @Composable
 fun WorkoutListItem(
@@ -54,7 +55,7 @@ fun WorkoutListItem(
                 Icon(
                     imageVector = Icons.Default.PlayArrow,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary,
+                    tint = Purple80,
                     modifier = Modifier.clickable {
                         onStartPressed()
                     }

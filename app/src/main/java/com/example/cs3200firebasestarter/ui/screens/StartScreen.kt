@@ -1,6 +1,5 @@
 package com.example.cs3200firebasestarter.ui.screens
 
-import android.content.ClipData
 import androidx.compose.runtime.rememberCoroutineScope
 import android.content.Context
 import android.hardware.Sensor
@@ -13,16 +12,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material.icons.outlined.Done
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -34,12 +29,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.example.cs3200firebasestarter.ui.components.ChartDataCollection
-import com.example.cs3200firebasestarter.ui.components.CurveLineChart
 import com.example.cs3200firebasestarter.ui.components.FormField
 import com.example.cs3200firebasestarter.ui.models.LineData
-import com.example.cs3200firebasestarter.ui.navigation.Routes
-import com.example.cs3200firebasestarter.ui.repositories.WorkoutRepository
 import com.example.cs3200firebasestarter.ui.theme.Purple80
 import com.example.cs3200firebasestarter.ui.viewmodels.WorkoutViewModel
 import kotlinx.coroutines.launch
@@ -48,8 +39,8 @@ import kotlinx.coroutines.launch
 fun StartScreen(navHostController: NavHostController, id: String, context: Context){
     val viewModel: WorkoutViewModel = viewModel()
     val state = viewModel.uiState
-    var initialSteps = 0;
-    var getInit = true;
+    var initialSteps = 0
+    var getInit = true
     val scope = rememberCoroutineScope()
 
     LaunchedEffect(true){
@@ -79,7 +70,7 @@ fun StartScreen(navHostController: NavHostController, id: String, context: Conte
                         stepOutput = (event.values[0] - initialSteps).toString()
                         calculateCalories()
                         calculateDistance()
-                        state.lineData.add(LineData(System.currentTimeMillis().toInt()/60000F, state.caloriesBurned))
+                        state.lineData.add(LineData((System.currentTimeMillis().toInt() - state.startTime.toInt())/600000F, state.caloriesBurned))
                         isUpdating = false
                     }
                 }
@@ -118,7 +109,9 @@ fun StartScreen(navHostController: NavHostController, id: String, context: Conte
         .fillMaxSize()
         .padding(16.dp),
         verticalArrangement = Arrangement.SpaceAround) {
-        Text(text = state.exerciseTitle)
+        Text(text = state.exerciseTitle,
+            style = MaterialTheme.typography.headlineLarge,)
+        Divider()
         if(state.exerciseType == 0) {
             Text(text = "Steps: $stepOutput")
         }

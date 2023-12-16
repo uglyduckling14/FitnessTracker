@@ -66,6 +66,7 @@ fun RootNavigation(context: Context) {
                                 close()
                             }
                         }})
+                Divider()
                 NavigationDrawerItem(
                     label = { Text(text = "Completed Workouts")},
                     selected = false,

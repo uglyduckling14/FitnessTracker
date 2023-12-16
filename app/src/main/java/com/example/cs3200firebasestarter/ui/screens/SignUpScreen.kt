@@ -13,6 +13,7 @@ import androidx.navigation.NavHostController
 import com.example.cs3200firebasestarter.ui.components.FormField
 import com.example.cs3200firebasestarter.ui.navigation.Routes
 import com.example.cs3200firebasestarter.ui.repositories.UserRepository
+import com.example.cs3200firebasestarter.ui.theme.Purple80
 import com.example.cs3200firebasestarter.ui.viewmodels.SignUpViewModel
 import kotlinx.coroutines.launch
 
@@ -62,9 +63,10 @@ fun SignUpScreen(navHostController: NavHostController) {
                     modifier = Modifier.fillMaxWidth()
                 ){
                     TextButton(onClick = { navHostController.popBackStack() }) {
-                        Text(text = "Cancel")
+                        Text(text = "Cancel", color = Purple80)
                     }
                     Button(
+                        colors = ButtonDefaults.buttonColors(Purple80),
                         onClick = {
                             scope.launch {
                                 viewModel.signUp()

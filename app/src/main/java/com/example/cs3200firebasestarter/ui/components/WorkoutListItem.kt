@@ -7,10 +7,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -47,7 +46,7 @@ fun WorkoutListItem(
             Text(
                 text = name ?: "",
                 style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.primary
+                color = Purple80
             )
 
             // Start Workout Icon
@@ -81,7 +80,8 @@ fun WorkoutListItem(
                 text = EXERCISE_TYPES[exerciseType!!],
                 style = MaterialTheme.typography.titleSmall
             )
-        }
 
+        }
+        Divider()
     }
 }
